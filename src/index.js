@@ -4,9 +4,9 @@ const server = require('./server');
 const config = require('./config');
 
 const main = async () => {
-  let a;
+  let app;
   try {
-    a = await server.start(config)
+    app = await server.start(config)
   } catch (err) {
     throw new Error(err)
   }

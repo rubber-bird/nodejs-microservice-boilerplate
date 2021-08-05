@@ -17,7 +17,7 @@ const start = (config) => {
     app.use(helmet());
 
     app.get('/', (req, res) => {
-      res.send('ms');
+      res.send('Hello, World!');
     })
 
     app.listen(config.server.port, (err) => {
@@ -25,7 +25,7 @@ const start = (config) => {
         reject(new Error(err));
       }
 
-      console.log(`Service shipped at ${config.server.host}:${config.server.port}...`);
+      console.log(`🐳Service shipped at ${config.server.host}:${config.server.port}...`);
       resolve(app);
     });
   })
