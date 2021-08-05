@@ -2,17 +2,22 @@
 
 const Promise = require('bluebird');
 const express = require('express');
+const helmet = require('helmet');
+const logger = require('morgan');
 
-
-const main = (server) => {
+const start = (config) => {
   return new Promise((resolve, reject) => {
-    if (!server) {
+    if (!config.server) {
       reject(new Error('No config for server'));
     }
     const app = express();
 
+    app.use(logger('common', config.logger));
+    app.use(express.json());
+    app.use(helmet());
+
     app.get('/', (req, res) => {
-      res.send('ms')
+      res.send('ms');
     })
 
     app.listen(config.server.port, (err) => {
@@ -20,11 +25,12 @@ const main = (server) => {
         reject(new Error(err));
       }
 
+      console.log(`Service shipped at ${config.server.host}:${config.server.port}...`);
       resolve(app);
     });
   })
 }
 
 module.exports = {
-  main
+  start
 }

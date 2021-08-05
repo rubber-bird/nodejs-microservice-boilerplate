@@ -3,9 +3,13 @@
 const server = require('./server');
 const config = require('./config');
 
-let a;
-try {
-  a = server.main(config)
-} catch (err) {
-  throw new Error(err)
+const main = async () => {
+  let a;
+  try {
+    a = await server.start(config)
+  } catch (err) {
+    throw new Error(err)
+  }
 }
+
+main();

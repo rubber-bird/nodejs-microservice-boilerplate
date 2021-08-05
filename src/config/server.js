@@ -1,4 +1,5 @@
 
 module.exports = {
-  port:3000
+  host: process.env.HOST,
+  port: process.env.PORT
 }
