@@ -4,7 +4,7 @@ const Promise = require('bluebird');
 const express = require('express');
 
 
-const main = ({ server }) => {
+const main = (server) => {
   return new Promise((resolve, reject) => {
     if (!server) {
       reject(new Error('No config for server'));
@@ -15,7 +15,13 @@ const main = ({ server }) => {
       res.send('ms')
     })
 
-    app.listen(server.port, () => resolve(app));
+    app.listen(config.server.port, (err) => {
+      if (err) {
+        reject(new Error(err));
+      }
+
+      resolve(app);
+    });
   })
 }
 
